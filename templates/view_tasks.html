@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Tasks</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+        <h1>All Tasks</h1>
+        {% for task in tasks %}
+            <div style="background:white; padding:15px; margin-bottom:20px; border-radius:10px;">
+    
+
+    <h3>{{ task[1] }}</h3>
+
+    <p>{{ task[2] }}</p>
+
+    <p><strong>Priority:</strong> {{ task[3] }}</p>
+
+    <p><strong>Status:</strong> {{ task[4] }}</p>
+
+    
+    <a href="/delete_task/{{ task[0] }}">
+    <button>Delete</button>
+</a>
+
+</div>
+               
+            
+        {% endfor %}
+
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+<script>
+
+    const socket = io();
+
+    socket.on("task_update", function(data) {
+
+        alert(data.message);
+
+    });
+
+</script>
+    </body>
+</html>
